@@ -123,6 +123,24 @@
             font-weight: bold;
             font-size: 24px;
         }
+
+        .button {
+            padding: 5px 10px;  /* Espaciado interno */
+            font-size: 20px;    /* Tamaño de la fuente */
+            border: 2px solid #007BFF;  /* Borde azul */
+            border-radius: 10px;  /* Bordes redondeados */
+            background-color: #006652;
+            color: white;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: 50px;
+            bottom: 0%;
+        
+        }
+    
     </style>
 </head>
 <body>
@@ -148,10 +166,9 @@
 
         <!-- Mode Display -->
         <div class="button-container" id="button-container">
-            Caminar
+            <div class="button" id="button" onmousedown="button()" onmouseup="stopButon()">CAMINAR</div>
         </div>
         <div class="light-container" id="light-container">
-            Modo: Luz Verde
         </div>
     </div>
 
@@ -171,6 +188,8 @@
         let temporizadorRegeneracion;
         let modoActual = "Luz Verde";
         let jugando = true;
+        let buttonInterval;
+
 
         /* ---------- Game Logic Functions ---------- */
         function aumentarProgreso() {
@@ -264,6 +283,31 @@
             }
         });
 
+
+        function button() {
+            buttonInterval = setInterval(function() {
+                if (energiaActual > 0) {
+                    showPlayerGif();
+                    avanzar();
+                    clearTimeout(temporizadorRegeneracion);
+                }
+                if (energiaActual === 0) {
+                    showPlayerImage();
+                }
+                if(modoActual === "Luz Roja") {
+                    perderJuego();
+                }
+        }, 50);
+        }
+
+        function stopButon() {
+            clearInterval(buttonInterval);  // Detiene la repetición de la acción
+            showPlayerImage();
+            detenerAvance();
+        }
+
+
+
         /* ---------- Mode Functions ---------- */
         function alternarModo() {
             if (!jugando) return;
@@ -293,7 +337,7 @@
         modoDisplay.style.backgroundColor = "red";
 
         // Mostrar mensaje de derrota
-        alert("¡Has perdido! No puedes presionar en Luz Roja.");
+        
     }
 
         /* ---------- Initialize Game ---------- */
