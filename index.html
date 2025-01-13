@@ -189,7 +189,7 @@
         let modoActual = "Luz Verde";
         let jugando = true;
         let buttonInterval;
-
+        let movimiento = false
 
         /* ---------- Game Logic Functions ---------- */
         function aumentarProgreso() {
@@ -219,6 +219,7 @@
             movePlayer();
             energiaActual -= 1;
             EnergyBar.style.height = energiaActual + '%';
+            movimiento = true;
         }
 
         function movePlayer() {
@@ -229,7 +230,7 @@
         }
 
         function regenerarEnergia() {
-            if (energiaActual < 100) {
+            if (energiaActual < 100 && movimiento === false) {
                 energiaActual += 2;
                 EnergyBar.style.height = energiaActual + '%';
             }
@@ -240,7 +241,7 @@
             clearTimeout(temporizadorRegeneracion);
             temporizadorRegeneracion = setTimeout(() => {
                 const interval = setInterval(() => {
-                    if (!keyHolded && energiaActual < 100) {
+                    if (!keyHolded && energiaActual < 100 && movimiento === false) {
                         regenerarEnergia();
                     } else {
                         clearInterval(interval);
@@ -280,6 +281,7 @@
             if (event.key === "ArrowUp") {
                 showPlayerImage();
                 detenerAvance();
+                movimiento = false;
             }
         });
 
@@ -304,6 +306,7 @@
             clearInterval(buttonInterval);  // Detiene la repetición de la acción
             showPlayerImage();
             detenerAvance();
+            movimiento = false
         }
 
 
