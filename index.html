@@ -21,7 +21,7 @@
             flex-direction: row;
             align-items: center;
             gap: 20px;
-            height: 900px;
+            height: 750px;
             width: 400px;
             background-image: url(sprites/Map/MapBase.png);
             background-position: center;
@@ -75,11 +75,11 @@
             justify-content: center;
             align-items: center;
             width: 350px;
-            height: 615px;
+            height: 515px;
         }
 
         .terrain-container img {
-            width: 75%;
+            width: 66%;
             height: auto;
             image-rendering: pixelated;
             position: absolute;
@@ -88,7 +88,7 @@
 
         .player-container {
             position: relative;
-            bottom: -223px;
+            bottom: -195px;
             z-index: 2;
             width: 30px;
             height: auto;
@@ -127,9 +127,8 @@
         .button {
             padding: 5px 10px;  /* Espaciado interno */
             font-size: 20px;    /* Tamaño de la fuente */
-            border: 2px solid #007BFF;  /* Borde azul */
             border-radius: 10px;  /* Bordes redondeados */
-            background-color: #006652;
+            box-shadow:5px 5px 15px rgba(0, 0, 0, 0.5);
             color: white;
             display: flex;
             text-align: center;
@@ -186,7 +185,7 @@
 
         let progresoActual = 0;
         let energiaActual = 100;
-        let playerBoxPosition = -223;
+        let playerBoxPosition = -195;
         let keyHolded = false;
         let temporizadorRegeneracion;
         let modoActual = "Luz Verde";
@@ -227,7 +226,7 @@
 
         function movePlayer() {
             if (playerBoxPosition < 1000) {
-                playerBoxPosition += 1;
+                playerBoxPosition += 0.75;
                 playerBox.style.bottom = playerBoxPosition + 'px';
             }
         }
